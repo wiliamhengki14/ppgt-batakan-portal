@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone_number')->unique();
+            $table->enum('role', ['admin', 'ppgt_member', 'pengunjung'])->default('ppgt_member');
+            $table->boolean('is_eligible_for_duty')->default(false);
+            $table->integer('duty_count')->default(0);
+            $table->date('last_duty_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
