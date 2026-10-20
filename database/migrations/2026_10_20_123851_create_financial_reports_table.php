@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('financial_reports', function (Blueprint $table) {
             $table->id();
-            $table->string('report_member')->unique();
+            $table->string('report_number')->unique();
             $table->string('title');
             $table->date('period_start');
             $table->date('period_end');
