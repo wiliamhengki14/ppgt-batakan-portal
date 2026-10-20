@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('activity_photos', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->date('event_date');
-            $table->text('description');
-            $table->string('cover_photo_path')->nullable();
-            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('album_id')->constrained('activity_albums')->cascadeOnDelete();
+            $table->string('photo_path');
+            $table->string('caption')->nullable();
             $table->timestamps();
         });
     }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('fullname');
             $table->string('position');
             $table->string('division');
-            $table->string('photo_path');
+            $table->string('photo_path')->nullable();
             $table->integer('display_order')->default(0);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
