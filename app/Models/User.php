@@ -7,10 +7,12 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'phone_number', 'role', 'is_eligible_for_duty', 'duty_count', 'last_duty_at'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -22,11 +24,22 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    public function profile(): HasOne {
+        return $this->hasOne(PpgtProfile::class);
+    }
+    public function pushSubscriptions(): HasMany {
+        return $this->hasMany(PushSubscription::class);
+    }
+    public function scheduleRosters(): HasMany {
+        return $this->hasMany(ScheduleRoster::class);
+    }
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_eligible_for_duty' => 'boolean',
+            'last_duty_at' => 'date',
         ];
     }
 }
