@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('sector_in_batakan');
             $table->text('batakan_home_address');
-            $table->string('parents_name');
+            $table->string('parent_names');
 
             $table->string('overseas_city')->nullable();
             $table->text('overseas_address')->nullable();

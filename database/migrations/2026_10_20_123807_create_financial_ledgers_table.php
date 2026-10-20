@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('type', ['income', 'expense']);
             $table->string('category');
             $table->decimal('amount', 12, 2);
-            $table->text('desciption')->nullable();
+            $table->text('description')->nullable();
             $table->string('receipt_path')->nullable();
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
