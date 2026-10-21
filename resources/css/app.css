@@ -11,3 +11,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: white;
 }
+
+input, button, textarea, select {
+    font: inherit;
+    outline: none;
+}
