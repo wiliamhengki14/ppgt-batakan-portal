@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-    text-decoration: none;
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: white;
+}
+
+input, button, textarea, select {
+    font: inherit;
+    outline: none;
 }
