@@ -16,9 +16,12 @@ class PpgtProfile extends Model
         'sector_in_batakan',
         'batakan_home_address',
         'parent_names',
+        'talents',
         'overseas_city',
         'overseas_address',
         'overseas_purpose',
+        'church_at_overseas',
+        'return_plan',
         'verification_status',
         'rejection_note',
         'verified_by',
@@ -28,12 +31,16 @@ class PpgtProfile extends Model
     protected $casts = [
         'birth_date' => 'date',
         'verified_at' => 'datetime',
+        'talents' => 'array',
     ];
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
-    public function verifier(): BelongsTo {
+
+    public function verifier(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'verified_by');
     }
 }

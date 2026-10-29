@@ -57,14 +57,14 @@ const Input = (props: PropTypes) => {
                     name={name}
                     required={required}
                     placeholder={inputPlaceholder}
-                    className={`w-full py-3 bg-slate-50/70 border-[#3A86FF] text-sm text-slate-800 placeholder-slate-400 rounded-xl outline-none focus:bg-white focus:ring-2 focus:ring-[#3A86FF]/25 focus:border-[#3A86FF] transition-all duration-200 ${
+                    className={`w-full py-3 bg-white text-sm text-slate-800 placeholder-slate-500 rounded-xl outline-none focus:ring-2 focus:ring-[#3A86FF]/25 focus:border-[#3A86FF] transition-all duration-200 ${
                         icon ? 'pl-11' : 'pl-4'
                     } ${
                         rightElement ? 'pr-11' : 'pr-4'
                     } ${
                         error
                             ? 'border-rose-400 bg-rose-50/20 focus:border-rose-500 focus:ring-rose-500/20'
-                            : 'border-slate-200 hover:border-slate-300'
+                            : 'border-[#3A86FF] '
                     } ${className}`}
                     {...rest}
                 />

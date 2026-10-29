@@ -20,11 +20,14 @@ class ActivityAlbum extends Model
     protected $casts = [
         'event_date' => 'date',
     ];
-    public function activityPhotos(): HasMany {
+
+    public function activityPhotos(): HasMany
+    {
         return $this->hasMany(ActivityPhoto::class, 'album_id');
     }
 
-    public function creator(): BelongsTo {
+    public function creator(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'created_by');
     }
 }
