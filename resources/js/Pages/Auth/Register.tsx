@@ -90,7 +90,7 @@ export default function Register() {
                 /* Posisi awal sebelum masuk layar: digeser 100px ke kiri (-100px) & transparan */
                 .reveal-from-left {
                     opacity: 0;
-                    transform: translateX(-100px);
+                    transform: translateX(-500px);
                     transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
                     will-change: opacity, transform;
                 }
@@ -103,7 +103,7 @@ export default function Register() {
                 /* Posisi awal sebelum masuk layar: digeser 100px ke kanan (100px) & transparan */
                 .reveal-from-right {
                     opacity: 0;
-                    transform: translateX(100px);
+                    transform: translateX(500px);
                     transition: opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2s cubic-bezier(0.16, 1, 0.3, 1);
                     will-change: opacity, transform;
                 }
@@ -114,7 +114,7 @@ export default function Register() {
                 }
             `}</style>
             {/* Kolom Kiri: Showcase Branding PPGT (Desktop View) */}
-            <div className="hidden lg:flex lg:w-5/12 xl:w-1/2 relative bg-gradient-to-br from-[#3A86FF] via-blue-400 to-blue-300 p-10 xl:p-14 text-white flex-col justify-between overflow-hidden shadow-2xl reveal-from-left">
+            <div className="hidden lg:flex lg:w-5/12 xl:w-1/2 relative bg-gradient-to-br from-[#3A86FF] via-blue-400 to-blue-400 p-10 xl:p-14 text-white flex-col justify-between overflow-hidden shadow-2xl reveal-from-left">
                 {/* Decorative background glow circles */}
                 <div className="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl pointer-events-none" />
@@ -139,9 +139,8 @@ export default function Register() {
                 {/* Banner & Identitas Komunitas */}
                 <div className="relative z-10 my-auto py-8">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="p-2.5 bg-white rounded-2xl shadow-lg shadow-black/10">
-                            <ApplicationLogo className="w-10 h-10 object-contain" />
-                        </div>
+                        <ApplicationLogo className="w-12 h-12 object-contain" />
+                        
                         <div>
                             <h2 className="text-xl font-bold tracking-tight text-white">PPGT Jemaat Batakan</h2>
                             <p className="text-blue-100 text-xs">Gereja Toraja Klasis Walenrang Timur</p>
