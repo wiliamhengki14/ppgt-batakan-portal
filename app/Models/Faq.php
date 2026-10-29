@@ -8,6 +8,7 @@ class Faq extends Model
 {
     //
     protected $guarded = ['id'];
+
     protected $casts = [
         'is_published' => 'boolean',
         'display_order' => 'integer',

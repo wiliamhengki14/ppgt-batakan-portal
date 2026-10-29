@@ -10,8 +10,9 @@ class BoardMember extends Model
     protected $guarded = [
         'id',
     ];
+
     protected $casts = [
         'is_active' => 'boolean',
-        'display_order' => 'integer'
+        'display_order' => 'integer',
     ];
 }

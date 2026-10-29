@@ -17,11 +17,13 @@ class WorshipSchedule extends Model
         'event_date' => 'date',
     ];
 
-    public function creator(): BelongsTo {
+    public function creator(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function scheduleRosters(): HasMany {
+    public function scheduleRosters(): HasMany
+    {
         return $this->hasMany(ScheduleRoster::class, 'schedule_id');
     }
 }

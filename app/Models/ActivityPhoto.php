@@ -14,7 +14,8 @@ class ActivityPhoto extends Model
         'caption',
     ];
 
-    public function activityAlbum(): BelongsTo {
+    public function activityAlbum(): BelongsTo
+    {
         return $this->belongsTo(ActivityAlbum::class, 'album_id');
     }
 }

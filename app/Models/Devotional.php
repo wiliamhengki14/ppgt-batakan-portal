@@ -9,10 +9,13 @@ class Devotional extends Model
 {
     //
     protected $guarded = ['id'];
+
     protected $casts = [
         'published_at' => 'datetime',
     ];
-    public function creator(): BelongsTo {
+
+    public function creator(): BelongsTo
+    {
         return $this->belongsTo(User::class, 'created_by');
     }
 }

@@ -8,6 +8,7 @@ class FinancialReport extends Model
 {
     //
     protected $guarded = ['id'];
+
     protected $casts = [
         'period_start' => 'date',
         'period_end' => 'date',
@@ -15,7 +16,9 @@ class FinancialReport extends Model
         'total_expense' => 'decimal:2',
         'ending_balance' => 'decimal:2',
     ];
-    public function creator() {
+
+    public function creator()
+    {
         return $this->belongsTo(User::class, 'created_by');
     }
 }
