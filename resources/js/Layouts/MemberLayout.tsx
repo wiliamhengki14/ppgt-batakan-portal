@@ -1,5 +1,5 @@
 import { PropsWithChildren, useState, useEffect } from 'react';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import {
     Church,
@@ -46,7 +46,12 @@ export default function MemberLayout({
         }
         return false;
     });
-
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const handleLogout = () => {
+        router.post(route('logout'), {}, {
+            preserveScroll: true,
+        });
+    }
     // Simpan perubahan status buka/tutup ke localStorage
     useEffect(() => {
         localStorage.setItem('ppgt_sidebar_collapsed', String(isCollapsed));
@@ -171,10 +176,8 @@ export default function MemberLayout({
 
             {/* Bagian Bawah: Tombol Keluar */}
             <div className="pt-5 border-t border-slate-700/80">
-                <Link
-                    href={route('logout')}
-                    method="post"
-                    as="button"
+                <button
+                    onClick={() => setShowLogoutModal(true)}
                     title={collapsedMode ? 'Keluar' : undefined}
                     className={`group relative flex w-full items-center rounded-xl py-3 text-sm font-medium text-white transition hover:bg-rose-500/10 hover:text-rose-400 ${
                         collapsedMode ? 'justify-center px-0' : 'gap-3.5 px-4'
@@ -188,8 +191,53 @@ export default function MemberLayout({
                             Keluar
                         </span>
                     )}
-                </Link>
+                </button>
             </div>
+            {/* Modal Konfirmasi Logout (TC-NAV-05) */}
+            {showLogoutModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+                    {/* Backdrop Gelap */}
+                    <div
+                        className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity"
+                        onClick={() => setShowLogoutModal(false)}
+                    />
+
+                    {/* Kotak Dialog Modal */}
+                    <div className="relative z-10 w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+                        <div className='flex justify-between items-center'>
+                            <h3 className="text-lg font-bold text-slate-900">
+                                Konfirmasi Keluar
+                            </h3>
+                            <div className="flex size-10 items-center justify-center rounded-2xl bg-rose-50 text-rose-600 mb-4">
+                                <LogOut className="size-5" />
+                                
+                            </div>
+                            
+                        </div>
+
+                        
+                        <p className="mt-1.5 text-sm text-slate-600 leading-relaxed">
+                            Apakah Anda yakin ingin keluar dari sesi Portal Anggota PPGT Jemaat Batakan?
+                        </p>
+
+                        <div className="mt-6 flex items-center justify-end gap-3">
+                            <button
+                                type="button"
+                                onClick={() => setShowLogoutModal(false)}
+                                className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50"
+                            >
+                                Batal
+                            </button>
+                            <button
+                                className="rounded-xl bg-rose-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-rose-700"
+                                onClick={handleLogout}
+                            >
+                                Ya, Keluar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 
