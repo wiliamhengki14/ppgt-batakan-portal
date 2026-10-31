@@ -779,12 +779,11 @@ export default function Welcome({ auth }: Props) {
                     </p>
                   </div>
                 </div>
-                <a
-                  className="shrink-0 rounded-2xl bg-[#3A86FF] px-6 py-4 text-center text-sm font-semibold text-white transition hover:bg-zinc-700"
-                  href="#"
+                <Link className="shrink-0 rounded-2xl bg-[#3A86FF] px-6 py-4 text-center text-sm font-semibold text-white transition hover:bg-zinc-700"
+                  href={route('login')}
                 >
                   Buka Galeri Lengkap (Login)
-                </a>
+                </Link>
               </div>
             </div>
           </section>
