@@ -1316,7 +1316,7 @@ export default function SensusProfile({ profile }: Props) {
                         </div>
 
                         {/* Modal Body: Digital Card Preview */}
-                        <div className="py-4 ">
+                        <div className="py-4">
                             <div
                                 id="digital-kta-card"
                                 className="relative rounded-2xl p-5 sm:p-6 text-white shadow-xl overflow-hidden bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#1e3a8a] border border-blue-400/30"
