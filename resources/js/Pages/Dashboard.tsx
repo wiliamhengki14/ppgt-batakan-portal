@@ -31,6 +31,7 @@ import {
     Video,
     Wallet,
 } from 'lucide-react';
+import SensusProfile from './SensusProfile';
 
 interface IndexProps {
     user?: IUser;
@@ -44,17 +45,17 @@ interface IndexProps {
 }
 
 export default function Dashboard(props: IndexProps) {
-    const {profile, count_user, stats, user} = props;
+    const { profile, count_user, stats, user } = props;
     const { auth } = usePage().props as unknown as { auth: { user: IUser } };
     const currentUser =
         props.user && typeof props.user === 'object' && props.user.name
             ? props.user
             : auth?.user || {
-                  name: "Samuel Tandilangi'",
-                  email: 'samuel@example.com',
-                  phone_number: '08123456789',
-                  role: 'ppgt_member',
-              };
+                name: "Samuel Tandilangi'",
+                email: 'samuel@example.com',
+                phone_number: '08123456789',
+                role: 'ppgt_member',
+            };
 
     // Format tanggal dan waktu saat ini (WITA / Waktu Sekarang)
     const now = new Date();
@@ -82,6 +83,35 @@ export default function Dashboard(props: IndexProps) {
         hour: '2-digit',
         minute: '2-digit',
     }).format(now).replace('.', ':');
+
+    const statusSensus = () => {
+        if (profile?.verification_status === 'pending') {
+            return (
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-[#3A68FF] border border-blue-100">
+                    Status: Sensus verifikasi belum di setujui
+                </span>
+            )
+        }  else if (profile?.verification_status === 'approved') {
+            return (
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    Status: Sensus Terverifikasi
+                </span>
+            )
+        } else if (profile?.verification_status === 'rejected') {
+            return (
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-red-50 text-red-600 border border-red-400">
+                    Status: Sensus Di Tolak
+                </span>
+            )
+        } else if (!profile?.verification_status) {
+            return (
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-[#3A68FF] border border-blue-100">
+                    Silahkan isi sensus profile
+                </span>
+            )
+        }
+        return null;
+    }
 
     // Memicu animasi reveal saat masuk halaman dan saat di-scroll
     useEffect(() => {
@@ -172,12 +202,17 @@ export default function Dashboard(props: IndexProps) {
                         <BadgeCheck className="w-4 h-4 text-blue-600" />
                         <span>Verifikasi Belum Disetujui</span>
                     </div>
+                ) : !profile?.verification_status ? (
+                    <div className="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-200 text-blue-500 border border-blue-300 text-xs font-semibold">
+                        <BadgeCheck className="w-4 h-4 text-blue-600" />
+                        <span>Status belum ada</span>
+                    </div>
                 ): (
-                     <div className="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+                    <div className="hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
                         <BadgeCheck className="w-4 h-4 text-emerald-600" />
                         <span>Verifikasi Disetujui</span>
                     </div>
-                )} 
+                )}
 
                 {/* User Profile Pill */}
                 <div className="flex items-center gap-2.5 pl-2 border-l border-slate-200">
@@ -356,15 +391,7 @@ export default function Dashboard(props: IndexProps) {
                             <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-[#3A86FF] border border-blue-100">
                                 WITA: {currentDateFull}
                             </span>
-                            {profile?.verification_status === 'pending' ? (
-                                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-[#3A68FF] border border-blue-100">
-                                    Status: Sensus verifikasi belum di setujui
-                                </span>
-                            ) : (
-                                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                    Status: Sensus Terverifikasi
-                                </span>
-                            )}
+                            {statusSensus()}
                         </div>
                         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                             Shalom, {currentUser?.name || "Samuel Tandilangi'"}!
@@ -435,7 +462,7 @@ export default function Dashboard(props: IndexProps) {
                             <span>Terakhir: {user?.last_duty_at === null ? (
                                 'Belum ada riwayat'
                             ) : (
-                               `${user?.last_duty_at}` 
+                                `${user?.last_duty_at}`
                             )}</span>
                             <BadgeCheck className="w-4 h-4 text-amber-500" />
                         </div>
@@ -472,7 +499,7 @@ export default function Dashboard(props: IndexProps) {
                                 <span className="font-semibold text-[#3A86FF]">+{stats.new_member} Anggota baru</span>
                                 <UserCheck className="w-3.5 h-3.5 text-slate-400" />
                             </div>
-                        ): (
+                        ) : (
                             <div className="mt-3 pt-2.5 border-t border-slate-100 text-[11px] text-[#3A86FF] flex items-center justify-between">
                                 <span className="font-semibold text-[#3A86FF]">Belum Ada Anggota Baru</span>
                                 <UserCheck className="w-3.5 h-3.5 text-slate-400" />
