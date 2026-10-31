@@ -26,4 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/sensus/update-eligible', [MemberDashboardController::class, 'updateElgible'])->name('sensus.updateElgible');
 });
 
+Route::middleware('admin')->group(function() {
+
+});
+
 require __DIR__.'/auth.php';
