@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
                 'required',
                 'string',
                 'unique:users,phone_number',
-                'regex:/^(\+62|62|0)8[1-9][0-9]{7,11}$/'  
+                'regex:/^(\+62|62|0)8[1-9][0-9]{7,11}$/',
             ],
         ]);
 

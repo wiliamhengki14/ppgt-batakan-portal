@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\PpgtProfile;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -34,6 +35,9 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'pendingCensusCount' => fn () => $request->user()
+                ? PpgtProfile::where('verification_status', 'pending')->count()
+                : 0,
         ];
     }
 }

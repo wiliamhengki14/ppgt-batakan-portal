@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MemberDashboardController;
 use App\Http\Controllers\ProfileController;
@@ -26,8 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/sensus/update-eligible', [MemberDashboardController::class, 'updateElgible'])->name('sensus.updateElgible');
 });
 
-Route::middleware('admin')->group(function() {
-
+Route::middleware('admin')->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 });
 
 require __DIR__.'/auth.php';
